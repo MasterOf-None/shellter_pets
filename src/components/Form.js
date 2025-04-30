@@ -23,9 +23,15 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
     const { id } = router.query
+    const validId = /^[a-zA-Z0-9_-]+$/.test(id) ? id : null;
+
+    if (!validId) {
+      setMessage('Invalid pet ID');
+      return;
+    }
 
     try {
-      const res = await fetch(`/api/pets/${id}`, {
+      const res = await fetch(`/api/pets/${validId}`, {
         method: 'PUT',
         headers: {
           Accept: contentType,
