@@ -3,6 +3,8 @@
     push:
       branches:
         - main
+  permissions:
+    contents: read
 
   jobs:
     deploy:
